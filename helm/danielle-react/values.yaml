@@ -11,19 +11,7 @@ service:
 
 ingress:
   enabled: true
-  host: danielle-react.local
   className: nginx
+  host: danielle-react.local
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-
-resources:
-  limits:
-    cpu: 100m
-    memory: 128Mi
-  requests:
-    cpu: 100m
-    memory: 128Mi
-
-nodeSelector: {}
-tolerations: []
-affinity: {}
