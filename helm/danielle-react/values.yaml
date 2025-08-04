@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: salini10/danielle-react-app
-  tag: latest
+  tag: 0.0.0-build-2-202508042040
   pullPolicy: IfNotPresent
 
 service:

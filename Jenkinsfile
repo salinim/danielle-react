@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = 'salini10/danielle-react-app'
-        REPO_DIR = 'C:/IPBSampleReactCode/product-builder-ae-frontend'
+        REPO_DIR = 'C:/IPBReactCodeGit/danielle-react'
     }
 
     stages {
@@ -25,13 +25,15 @@ pipeline {
 		
 		stage('Generate Tags') {
             steps {
-                script {
-                    def version = powershell(script: "(Get-Content package.json | Out-String | ConvertFrom-Json).version", returnStdout: true).trim()
-                    def ts = new Date().format("yyyyMMddHHmm")
-                    
-                    env.IMAGE_COMBINED = "${env.IMAGE_NAME}:${version}-build-${env.BUILD_NUMBER}-${ts}"
-                }
-            }
+                 dir("${env.REPO_DIR}") {
+                    script {
+                        def version = powershell(script: "(Get-Content package.json | Out-String | ConvertFrom-Json).version", returnStdout: true).trim()
+                        def ts = new Date().format("yyyyMMddHHmm")
+
+                        env.IMAGE_COMBINED = "${env.IMAGE_NAME}:${version}-build-${env.BUILD_NUMBER}-${ts}"
+                    }
+             }
+         }
         }
 
         stage('Build Docker Image') {
