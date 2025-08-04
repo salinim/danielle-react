@@ -1,0 +1,29 @@
+replicaCount: 1
+
+image:
+  repository: salini10/danielle-react-app
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  host: danielle-react.local
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
